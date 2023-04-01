@@ -1,0 +1,41 @@
+CC := gcc
+S = ./src/
+O = ./out/
+I = ./inc/
+U = ./unit_tests/
+CFLAGS = -std=c99 -I$(I) -Wall -Werror -pedantic -c
+OBJS := $(O)lib_static.o
+OBJSCH := $(O)check_static_lib.o $(O)lib_static.o
+.PHONY: clean unit func debug release
+
+release: app.exe
+
+debug: CFLAGS += -DDEBUG -g3
+debug: app.exe
+	
+app.exe: out $(OBJS)
+	$(CC) -o $@ $(OBJS)
+
+unit: unit_tests.exe
+	./$^ 
+unit_tests.exe: out $(OBJSCH)
+	$(CC) -o $@ $(OBJSCH) -lcheck -lpthread
+
+$(O)lib_static.o: $(S)lib_static.c $(I)lib_static.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(O)check_static_lib.o: $(O)check_static_lib.c $(I)lib_static.h
+	$(CC) $(CFLAGS) $< -o $@
+
+out :
+	mkdir out
+
+clean:
+	rm -f $(O)*.o *.exe
+	rm -fr $(O)
+	rm -fv *.DS_Store
+	rm -fv *.dll
+
+func: app.exe
+		@echo
+		cd ./func_tests/ && ./all_tests.cmd

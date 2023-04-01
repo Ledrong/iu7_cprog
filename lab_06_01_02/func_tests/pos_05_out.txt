@@ -1,0 +1,9 @@
+chips toy
+3
+4
+toy car
+5
+6
+red apple
+7
+8

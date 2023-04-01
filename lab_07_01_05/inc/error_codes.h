@@ -1,0 +1,16 @@
+#ifndef __ERROR_CODES_H__
+#define __ERROR_CODES_H__
+
+#define ARGS_ERROR 1
+#define INCORRECT_FILTER 2
+#define NOT_KEY_ERROR 3
+#define EMPTY_FILE_ERROR 4
+#define COUNT_FILE_ERROR 5
+#define MEMORY_ERROR 6
+#define MYSORT_ERROR 7
+#define SIZE_OF_ARRAY_ERROR 8
+#define READ_FILE_ERROR 9
+#define COUNT_ERROR 10
+#define EMPTY_FILE 11
+
+#endif

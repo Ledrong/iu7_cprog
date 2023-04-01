@@ -1,0 +1,54 @@
+CC := gcc
+CFLAGS := -Werror -Wall -Wpedantic -Wvla
+I := ./inc/
+S := ./src/
+O := ./out/
+U := ./unit_tests/
+OBJSCH := dynamicl.dll $(O)check_dynamic_lib_l.o $(O)lib_dynamic_l.o
+MAKEOUT := $(shell mkdir ./out)
+
+.PHONY: clean unit func debug release
+
+release: CFLAGS += -g0
+release: $(O)release.build dynamicl.dll $(O)main_dynamic_lib_l.o
+	$(CC) $(COVFLAGS) $(O)main_dynamic_lib_l.o -o app.exe
+	
+debug: CFLAGS += -g3 -DDEBUG
+debug: $(O)debug.build dynamicl.dll $(O)main_dynamic_lib_l.o
+	$(CC) $(COVFLAGS) $(O)main_dynamic_lib_l.o -o app.exe
+
+unit: unit_tests.exe
+	./$^ 
+unit_tests.exe: out $(OBJSCH)
+	$(CC) -o $@ $(OBJSCH) -lcheck -lpthread
+
+$(O)lib_dynamic_l.o : $(S)lib_dynamic_l.c $(I)lib_dynamic_l.h
+	$(CC) -I$(I) $(CFLAGS) -D LIB_DYN_EXPORTS -c $< -o $@
+	
+dynamicl.dll : $(O)lib_dynamic_l.o
+	$(CC) -shared $^ -Wl,--subsystem,windows -o $@
+
+$(O)main_dynamic_lib_l.o : $(S)main_dynamic_lib_l.c $(I)lib_dynamic_l.h
+	$(CC) -c -I$(I) $(CFLAGS) $< -o $@
+
+$(O)check_dynamic_lib_l.o : $(O)check_dynamic_lib_l.o $(I)lib_dynamic_l.h
+
+$(O)release.build : 
+	make -f makefile_companovka clean
+	mkdir ./out
+	touch $@
+
+$(O)debug.build :
+	make -f makefile_companovka clean
+	mkdir ./out
+	touch $@
+
+clean :
+	rm -f $(O)*.o *.exe
+	rm -fr $(O)
+	rm -fv *.DS_Store
+	rm -fv *.dll
+
+func: app.exe
+		@echo
+		cd ./func_tests/ && ./all_tests.cmd

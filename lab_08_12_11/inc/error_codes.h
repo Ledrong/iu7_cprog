@@ -1,0 +1,12 @@
+#ifndef _ERROR_CODES_H_
+#define _ERROR_CODES_H_
+
+#define ERROR_ARGC 1
+#define DATA_MATRIX_ERROR 2
+#define ERROR_MATRIX_SIZE 3
+#define MATRIX_ELEMENT_ERROR 4
+#define DIFFERENT_SIZE_ERROR 5
+#define OPERATION_ERROR 6
+#define FILE_OPEN_ERROR 7
+
+#endif

@@ -1,0 +1,47 @@
+        -:    0:Source:myfunctions.c
+        -:    1:#include "myfunctions.h"
+        -:    2:
+    #####:    3:int input_str(char str[MAX_STR][MAX_LEN_OF_WORD])
+        -:    4:{
+    #####:    5:    int i = 0;
+        -:    6:    
+    #####:    7:    FILE *file = fopen("in.txt", "r");
+        -:    8:    
+    #####:    9:    while(!feof(file))
+        -:   10:    {
+    #####:   11:        fgets(str[i], MAX_LEN_OF_WORD, file);
+        -:   12:        
+    #####:   13:        printf("%s", str[i]);
+        -:   14:        
+    #####:   15:        i++;
+        -:   16:    }
+        -:   17:
+    #####:   18:    fclose(file);
+        -:   19:
+    #####:   20:    return i;
+        -:   21:}
+        -:   22:
+        -:   23:
+    #####:   24:void reverse_str(char str[MAX_STR][MAX_LEN_OF_WORD], char newstr[MAX_STR][MAX_LEN_OF_WORD], int size)
+        -:   25:{
+    #####:   26:    int k = 0, s = 0;
+        -:   27:    
+    #####:   28:    for (int i = size - 1; i >= 0; --i)
+        -:   29:    {
+    #####:   30:        for (int j = (int) strlen(str[i])-1; j >= 0; --j)
+        -:   31:        {
+    #####:   32:            newstr[k][s] = str[i][j];
+    #####:   33:            s++;
+        -:   34:        }
+    #####:   35:        newstr[k][s] = '\0';
+        -:   36:        
+    #####:   37:        k++;
+        -:   38:        
+    #####:   39:        s = 0;
+        -:   40:    }
+        -:   41:    
+    #####:   42:    for (int i = size - 1; i >= 0; --i)
+        -:   43:    {
+    #####:   44:        printf("%s", newstr[k]);
+        -:   45:    }
+    #####:   46:}

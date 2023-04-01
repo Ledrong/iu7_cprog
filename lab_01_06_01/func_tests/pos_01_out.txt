@@ -1,0 +1,1 @@
+Square of the triangle = 0.5

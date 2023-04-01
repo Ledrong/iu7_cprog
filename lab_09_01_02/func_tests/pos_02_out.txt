@@ -1,0 +1,9 @@
+Chips
+20
+5
+Cars
+10
+5
+Juice
+1
+3

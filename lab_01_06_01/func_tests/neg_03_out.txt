@@ -1,0 +1,1 @@
+Vertexes of the triangle are laying on one straight line or all vertexes are consisted with each other

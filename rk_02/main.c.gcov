@@ -1,0 +1,11 @@
+        -:    0:Source:main.c
+        -:    1:#include "myfunctions.h"
+        -:    2:
+    #####:    3:int main()
+        -:    4:{
+        -:    5:    char str[MAX_STR][MAX_LEN_OF_WORD], newstr[MAX_STR][MAX_LEN_OF_WORD];
+        -:    6:    
+    #####:    7:    int size = input_str(str);
+        -:    8:    
+    #####:    9:    reverse_str(str, newstr, size);
+        -:   10:}
